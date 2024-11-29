@@ -51,6 +51,6 @@ async function adsInit() {
     document.body.appendChild(script);
   } catch (error) {
     const today = new Date().toLocaleString();
-    console.error(`[${today}] Couldn't Fetch\n\n`, error);
+    console.error(`[${today}] Couldn't Fetch\n\n`, error, "\n\nRead our SkunkAd's Documentations for Best Pratice:\nhttps://skunkplatform.netlify.app/ads/docs");
   }
 }
