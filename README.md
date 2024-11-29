@@ -13,7 +13,7 @@ npm i skunkplatform-ads@es-1.0.0  # For ES Module
 
 #### Using in Node.js:
 ```bash
-npm i skunkplatform-ads@1.0.0  # For Node.js
+npm i skunkplatform-ads@1.0.1  # For Node.js (Fixed for the Main File Package)
 ```
 
 ### For Client-Side CDN
