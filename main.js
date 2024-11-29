@@ -27,6 +27,10 @@ class Client {
   }
 
   async loadAdsScript() {
+    if (typeof document === 'undefined') {
+      console.log("`document` is Undefined. You are using an environment that doesn't support the DOM (e.g., Visual Studio Code).\nThe `document` requires in the Website for Google Cloud, Github Pages, Netlify, Namecheap Domain, etc.\nRead the Best of Pratice by Documentations: https://skunkplatform.netlify.app/ads/docs");
+      return;
+    }
     try {
       const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
       const data = await response.text();  // Wait for the text response
@@ -42,6 +46,10 @@ class Client {
 };
 
 async function adsInit() {
+  if (typeof document === 'undefined') {
+      console.log("`document` is Undefined. You are using an environment that doesn't support the DOM (e.g., Visual Studio Code).\nThe `document` requires in the Website for Google Cloud, Github Pages, Netlify, Namecheap Domain, etc.\nRead the Best of Pratice by Documentations: https://skunkplatform.netlify.app/ads/docs");
+      return;
+  }
   try {
     const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
     const data = await response.text();  // Wait for the text response
