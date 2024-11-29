@@ -2,7 +2,7 @@ console.log(`SkunkAds
 - API:
 SkunkAds for API has been Added by using ads.create().
 - Used:
-Content Delivery Network
+Client-Side JavaScript
 - Example Usage:
 // Use this Example
 const adClient = new Client();
@@ -14,51 +14,100 @@ adsInit(); // for a short function
 `);
 
 class Client {
-  constructor() {
-    // No need for anything in the constructor unless you need to initialize properties
-  }
-
-  async initialize() {
-    await this.loadAdsScript();
-  }
-
-  async init() {
-    await this.loadAdsScript();
-  }
-
-  async loadAdsScript() {
-    if (typeof document === 'undefined') {
-      console.log("`document` is Undefined. You are using an environment that doesn't support the DOM (e.g., Visual Studio Code).\nThe `document` requires in the Website for Google Cloud, Github Pages, Netlify, Namecheap Domain, etc.\nRead the Best of Pratice by Documentations: https://skunkplatform.netlify.app/ads/docs");
-      return;
+    constructor() {
+        // No need for anything in the constructor unless you need to initialize properties
     }
-    try {
-      const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
-      const data = await response.text();  // Wait for the text response
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.innerHTML = data;  // Set the fetched script content
-      document.body.appendChild(script);  // Append the script to the body
-    } catch (error) {
-      const today = new Date().toLocaleString(); // Get current date and time
-      console.error(`[${today}] Couldn't Fetch\n\n`, error); // Log current time and error
+
+    async initialize() {
+        await this.loadAdsScript();
     }
-  }
-};
+
+    async loadAdsScript() {
+        if (!this.isBrowserEnvironment()) return;
+
+        try {
+            const scriptData = await this.fetchAdScript();
+            this.appendScriptToDocument(scriptData);
+        } catch (error) {
+            this.handleError(error);
+        }
+    }
+
+    isBrowserEnvironment() {
+        if (typeof document === 'undefined') {
+            console.log("`document` is Undefined. You are using an environment that doesn't support the DOM (e.g., Visual Studio Code). Read our documentation: https://skunkplatform.netlify.app/ads/docs");
+            return false;
+        }
+        return true;
+    }
+
+    async fetchAdScript() {
+        const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ad script: ${response.statusText}`);
+        }
+        return response.text();
+    }
+
+    appendScriptToDocument(data) {
+        try {
+            const script = document.createElement("script");
+            script.type = "text/javascript";
+            script.innerHTML = data;
+            document.body.appendChild(script);
+        } catch (error) {
+            this.handleError(error);
+        }
+    }
+
+    handleError(error) {
+        const today = new Date().toLocaleString();
+        console.error(`[${today}] Error:`, error);
+    }
+}
 
 async function adsInit() {
-  if (typeof document === 'undefined') {
-      console.log("`document` is Undefined. You are using an environment that doesn't support the DOM (e.g., Visual Studio Code).\nThe `document` requires in the Website for Google Cloud, Github Pages, Netlify, Namecheap Domain, etc.\nRead the Best of Pratice by Documentations: https://skunkplatform.netlify.app/ads/docs");
-      return;
-  }
-  try {
-    const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
-    const data = await response.text();  // Wait for the text response
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.innerHTML = data;
-    document.body.appendChild(script);
-  } catch (error) {
-    const today = new Date().toLocaleString();
-    console.error(`[${today}] Couldn't Fetch\n\n`, error, "\n\nRead our SkunkAd's Documentations for Best Pratice:\nhttps://skunkplatform.netlify.app/ads/docs");
-  }
+    if (!isBrowserEnvironment()) return;
+
+    try {
+        const scriptData = await fetchAdScript();
+        appendScriptToDocument(scriptData);
+    } catch (error) {
+        handleError(error);
+    }
 }
+
+function isBrowserEnvironment() {
+    if (typeof document === 'undefined') {
+        console.log("`document` is Undefined. You are using an environment that doesn't support the DOM.");
+        return false;
+    }
+    return true;
+}
+
+async function fetchAdScript() {
+    const response = await fetch("https://skunkplatform.netlify.app/api/ads.js");
+    if (!response.ok) {
+        throw new Error(`Failed to fetch ad script: ${response.statusText}`);
+    }
+    return response.text();
+}
+
+function appendScriptToDocument(data) {
+    try {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.innerHTML = data;
+        document.body.appendChild(script);
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+function handleError(error) {
+    const today = new Date().toLocaleString();
+    console.error(`[${today}] Error:`, error);
+}
+
+// Make sure you're exporting them correctly (if using modules)
+export { Client, adsInit };
