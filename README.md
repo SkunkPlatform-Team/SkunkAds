@@ -8,7 +8,7 @@ SkunkAds is an advertisement solution for Client-Side and Node.js environments.
 
 #### ES Module:
 ```bash
-npm i skunkplatform-ads@es-1.0.0  # For ES Module
+npm i skunkplatform-ads@es-1.0.1  # For ES Module
 ```
 
 #### Using in Node.js:
