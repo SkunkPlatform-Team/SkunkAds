@@ -24,3 +24,6 @@ Add this to your HTML file:
   <script src="https://cdn.jsdelivr.net/gh/SkunkPlatform-Team/main.js" defer></script> <!-- Uses defer -->
 </body>
 ```
+
+Read our SkunkAd's Documentations for Pratice Script. Here:
+Click Blue Text: [SkunkAds Documentations](https://skunkplatform.netlify.app/ads)
