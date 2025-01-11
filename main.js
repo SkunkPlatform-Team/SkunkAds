@@ -13,6 +13,23 @@ adClient.initialize(); // Don't forget to call the method with parentheses
 adsInit(); // for a short function
 `);
 
+async function help() {
+    console.log(`Help & Documentation:
+1. Initialize ads with Client:
+   const adClient = new Client();
+   adClient.initialize();
+
+2. Quick setup with adsInit:
+   adsInit();
+
+3. Ensure the JavaScript is compatible with CDN, ES Module, and CommonJS.
+
+4. Ensure the Package Version is compatible with 1.0.1 to 1.0.3 for CommonJS, ES Module: 1.0.2-ES
+
+5. For more information, visit:
+   https://skunkplatform.netlify.app/ads/docs
+`);
+
 class Client {
     constructor() {
         // No need for anything in the constructor unless you need to initialize properties
