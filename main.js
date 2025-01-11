@@ -22,11 +22,7 @@ async function help() {
 2. Quick setup with adsInit:
    adsInit();
 
-3. Ensure the JavaScript is compatible with CDN, ES Module, and CommonJS.
-
-4. Ensure the Package Version is compatible with 1.0.1 to 1.0.3 for CommonJS, ES Module: 1.0.2-ES
-
-5. For more information, visit:
+3. For more information, visit:
    https://skunkplatform.netlify.app/ads/docs
 `);
 
